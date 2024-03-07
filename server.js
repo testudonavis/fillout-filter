@@ -6,7 +6,7 @@ const port = 3000;
 
 const BASE_URL = 'https://api.fillout.com';
 
-// Define an API endpoint
+// Filter endpoint
 app.get('/:formId/filteredResponses', async (req, res) => {
   const accessToken = process.env.ACCESS_TOKEN;
   const { formId } = req.params;
@@ -17,14 +17,13 @@ app.get('/:formId/filteredResponses', async (req, res) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
+        params: req.query,
       }
     );
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error });
   }
-
-  // res.json({ message: 'Hello, world!' });
 });
 
 // Start the server
